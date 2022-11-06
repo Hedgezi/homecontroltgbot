@@ -32,6 +32,7 @@ async def throwout(message: Message):
             curthrasher += 1
         with open("orders.json", 'w') as f:
             json.dump({'curthr': curthrasher}, f)
+        await bot.send_message(admin_id, 'работает')
         await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!!')
 
 async def main():
