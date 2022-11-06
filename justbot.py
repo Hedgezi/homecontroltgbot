@@ -16,7 +16,7 @@ with open("orders.json") as f:
 
 @dp.message(Command(commands=['info']))
 async def infocmd(message: Message):
-    await message.reply("я работаю <br>© kolya, from 2022 to eternity", parse_mode="HTML")
+    await message.reply("я работаю \n© kolya, from 2022 to eternity", parse_mode="HTML")
 
 @dp.message(Text(text='я выкинул(а) мусор'))
 async def throwout(message: Message):
