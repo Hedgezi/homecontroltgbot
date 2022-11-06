@@ -3,8 +3,7 @@ from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 from aiogram.filters import Text
 
-
-from apscheduler.schedulers.background import BackgroundScheduler
+# from apscheduler.schedulers.background import BackgroundScheduler
 
 import asyncio
 from everysettings import *
@@ -12,9 +11,12 @@ import json
 
 bot = Bot(BOT_ID, parse_mode="HTML")
 dp = Dispatcher()
-scheduler = BackgroundScheduler()
 with open("orders.json") as f:
     curthrasher = json.load(f)['curthr']
+
+@dp.message(Command(commands=['info']))
+async def infocmd(message: Message):
+    await message.reply("я работаю <br>© kolya, from 2022 to eternity", parse_mode="HTML")
 
 @dp.message(Text(text='я выкинул(а) мусор'))
 async def throwout(message: Message):
@@ -27,9 +29,8 @@ async def throwout(message: Message):
         with open("orders.json", 'w') as f:
             json.dump({'curthr': curthrasher}, f)
         kbthrowout = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='я выкинул(а) мусор')]])
-        await message.reply("молодец", reply_markup=ReplyKeyboardRemove)
-        await bot.send_message(admin_id, 'работает')
-        await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!!', reply_markup=kbthrowout)
+        await message.reply("молодец, твой пирожок - 🍔", reply_markup=ReplyKeyboardRemove)
+        await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!! 🗑️🗑️🗑️', reply_markup=kbthrowout)
 
 async def main():
     global curthrasher, bot
