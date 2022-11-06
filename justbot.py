@@ -16,12 +16,6 @@ scheduler = BackgroundScheduler()
 with open("orders.json") as f:
     curthrasher = json.load(f)['curthr']
 
-@dp.message(Command(commands=['start']))
-async def start(message: Message):
-    kbthrowout = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='я выкинул(а) мусор')]])
-    await message.reply('start', reply_markup=kbthrowout)
-
-
 @dp.message(Text(text='я выкинул(а) мусор'))
 async def throwout(message: Message):
     global curthrasher, dp, bot
@@ -32,8 +26,10 @@ async def throwout(message: Message):
             curthrasher += 1
         with open("orders.json", 'w') as f:
             json.dump({'curthr': curthrasher}, f)
+        kbthrowout = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='я выкинул(а) мусор')]])
+        await message.reply("молодец", reply_markup=ReplyKeyboardRemove)
         await bot.send_message(admin_id, 'работает')
-        await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!!')
+        await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!!', reply_markup=kbthrowout)
 
 async def main():
     global curthrasher, bot
