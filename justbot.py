@@ -18,6 +18,13 @@ with open("orders.json") as f:
 async def infocmd(message: Message):
     await message.reply("я работаю \n© kolya, from 2022 to eternity", parse_mode="HTML")
 
+@dp.message(Command(commands=['whoseturn']))
+async def whoseturncmd(message: Message):
+    for i in range(len(users)):
+        if users[i][1] == message.from_user.id:
+            askeduser = i
+    await message.reply(f"сейчас очередь: {users[curthrasher][0]} \nтвоя очередь будет через: {askeduser - curthrasher if askeduser >= curthrasher else len(users) - curthrasher + askeduser}")
+
 @dp.message(Text(text='я выкинул(а) мусор'))
 async def throwout(message: Message):
     global curthrasher, dp, bot
