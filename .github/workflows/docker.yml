@@ -68,4 +68,4 @@ jobs:
 
       - name: Start docker container
         if: always()
-        run: ssh staging "docker run -d --name mujbot -v /home/${{ secrets.SSH_USER }}/homecontroltgbot/orders.json:/app/orders.json -v /home/${{ secrets.SSH_USER }}/homecontroltgbot/everysettings.py:/app/everysettings.py ghcr.io/hedgezi/$IMAGE_NAME:${GITHUB_RUN_ID}"
+        run: ssh staging "docker run -d --name mujbot -v /home/${{ secrets.SSH_USER }}/homecontroltgbot/orders.json:/app/orders.json -v /home/${{ secrets.SSH_USER }}/homecontroltgbot/configs.py:/app/configs.py ghcr.io/hedgezi/$IMAGE_NAME:${GITHUB_RUN_ID}"
