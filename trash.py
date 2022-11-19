@@ -1,18 +1,9 @@
-from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 from aiogram.filters import Text
-
-# from apscheduler.schedulers.background import BackgroundScheduler
-
-import asyncio
-from everysettings import *
 import json
 
-bot = Bot(BOT_ID, parse_mode="HTML")
-dp = Dispatcher()
-with open("orders.json") as f:
-    curthrasher = json.load(f)['curthr']
+from botinits import *
 
 @dp.message(Command(commands=['info']))
 async def infocmd(message: Message):
@@ -38,10 +29,3 @@ async def throwout(message: Message):
         kbthrowout = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='я выкинул(а) мусор')]])
         await message.reply("молодец, твой пирожок - 🍔", reply_markup=ReplyKeyboardRemove)
         await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!! 🗑️🗑️🗑️', reply_markup=kbthrowout)
-
-async def main():
-    global curthrasher, bot
-    await dp.start_polling(bot)
-
-
-asyncio.run(main())
