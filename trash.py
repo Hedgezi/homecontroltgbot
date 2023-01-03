@@ -24,8 +24,8 @@ async def throwout(message: Message):
             curthrasher = 0
         else:
             curthrasher += 1
-        with open("orders.json", 'w') as f:
-            json.dump({'curthr': curthrasher}, f)
+        with open("states.json", 'w') as f:
+            json.dump({'curthr': curthrasher, 'coffset': cleaningoffset}, f)
         kbthrowout = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='я выкинул(а) мусор')]])
         await message.reply("молодец, твой пирожок - 🍔", reply_markup=ReplyKeyboardRemove)
         await bot.send_message(users[curthrasher][1], 'твоя очередь выкидывать мусор!! 🗑️🗑️🗑️', reply_markup=kbthrowout)
