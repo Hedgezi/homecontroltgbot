@@ -46,6 +46,8 @@ async def typeproductprice(message: Message, state: FSMContext) -> None:
     print(data)
     allids = [i[1] for i in users]
     senderid = allids.index(message.from_user.id)
+    moneytogive = int(data['productprice'])/len(users)
     await message.answer("кайф")
     for i in allids[0:senderid]+allids[senderid+1:]:
-        await bot.send_message(i, 'тебе надо заплатить за ' + data['productname'] + ' ' + str(int(data['productprice'])/len(users)) + ' от ' + users[senderid][0])
+        await bot.send_message(i, 'тебе надо заплатить за ' + data['productname'] + ' ' + str(moneytogive) + ' от ' + users[senderid][0])
+        
