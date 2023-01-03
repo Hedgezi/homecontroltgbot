@@ -7,4 +7,5 @@ COPY botinits.py botinits.py
 COPY trash.py trash.py
 COPY cleaning.py cleaning.py
 COPY launching.py launching.py
+COPY moneyreport.py moneyreport.py
 CMD ["python3", "launching.py"]
