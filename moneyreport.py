@@ -1,7 +1,7 @@
 from aiogram.filters import Command
 from aiogram.types import Message, ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 from aiogram.filters import Text
-from aiogram import Router
+from aiogram import Router, F
 
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -22,6 +22,7 @@ async def returnmoneycmd(message: Message, state: FSMContext) -> None:
     await message.answer("напиши что ты купил(а)")
 
 @form_router.message(Command(commands=["cancelrm"]))
+@form_router.message(F.text.casefold() == "отмена")
 async def cancelcmd(message: Message, state: FSMContext) -> None:
     current_state = await state.get_state()
     if current_state is None:
